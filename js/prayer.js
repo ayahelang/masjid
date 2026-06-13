@@ -54,7 +54,12 @@ Isha:"Isya"
 target.innerHTML =
 prayers.map(p=>`
 
-<div class="prayer-item">
+<div class="
+prayer-item
+${nextPrayer===labels[p]
+? 'active-prayer'
+: ''}
+">
 
 <span>${labels[p]}</span>
 
