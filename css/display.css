@@ -160,3 +160,18 @@ padding:8px;
 border-radius:8px;
 
 }
+
+@media (min-width:1024px){
+
+.container{
+
+display:grid;
+
+grid-template-columns:
+35% 65%;
+
+gap:20px;
+
+}
+
+}
