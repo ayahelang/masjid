@@ -23,6 +23,11 @@ async function loadPrayerTimes() {
             const lng =
                 position.coords.longitude;
 
+            loadLocationName(
+lat,
+lng
+);
+
             const url =
                 `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lng}&method=11`;
 
