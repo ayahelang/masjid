@@ -64,7 +64,7 @@ updateClock();
 loadConfig().then(()=>{
 
 loadPrayerTimes();
-
 loadHijri();
+loadWallpapers();
 
 });
