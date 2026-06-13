@@ -186,3 +186,11 @@ document.getElementById(
 },1000);
 
 }
+
+loadConfig().then(()=>{
+
+loadPrayerTimes();
+
+loadHijri();
+
+});
