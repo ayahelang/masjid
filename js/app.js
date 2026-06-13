@@ -1,14 +1,32 @@
 let config = {};
 
-async function loadConfig() {
+async function loadConfig(){
 
-    const response =
-        await fetch("data/config.json");
+const saved =
+localStorage.getItem(
+"silverhawkMasjid"
+);
 
-    config =
-        await response.json();
+if(saved){
 
-    renderConfig();
+config =
+JSON.parse(saved);
+
+renderConfig();
+
+return;
+
+}
+
+const response =
+await fetch(
+"data/config.json"
+);
+
+config =
+await response.json();
+
+renderConfig();
 
 }
 
