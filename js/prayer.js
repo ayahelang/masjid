@@ -160,3 +160,31 @@ function showCountdown(
     },1000);
 
 }
+
+function autoRefreshPrayer(){
+
+    const now =
+        new Date();
+
+    const nextDay =
+        new Date();
+
+    nextDay.setHours(
+        24,
+        0,
+        0,
+        0
+    );
+
+    const delay =
+        nextDay - now;
+
+    setTimeout(()=>{
+
+        loadPrayerTimes();
+
+        autoRefreshPrayer();
+
+    },delay);
+}
+
