@@ -49,3 +49,52 @@ function fillForm(){
     );
 
 }
+
+document
+.getElementById(
+"saveBtn"
+)
+.addEventListener(
+"click",
+()=>{
+
+config.masjid.nama =
+document
+.getElementById(
+"namaMasjid"
+)
+.value;
+
+config.masjid.alamat =
+document
+.getElementById(
+"alamatMasjid"
+)
+.value;
+
+config.runningText =
+document
+.getElementById(
+"runningText"
+)
+.value
+.split("\n");
+
+config.announcement =
+document
+.getElementById(
+"announcement"
+)
+.value
+.split("\n");
+
+localStorage.setItem(
+"silverhawkMasjid",
+JSON.stringify(config)
+);
+
+alert(
+"Data tersimpan"
+);
+
+});
