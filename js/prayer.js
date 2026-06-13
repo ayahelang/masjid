@@ -4,27 +4,50 @@ let countdownInterval;
 
 async function loadPrayerTimes() {
 
-    const lat =
-        config.masjid.latitude;
+    if (!navigator.geolocation) {
 
-    const lng =
-        config.masjid.longitude;
+        alert(
+            "Browser tidak mendukung GPS"
+        );
 
-    const url =
-        `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lng}&method=11`;
+        return;
+    }
 
-    const response =
-        await fetch(url);
+    navigator.geolocation.getCurrentPosition(
 
-    const data =
-        await response.json();
+        async (position) => {
 
-    prayerTimes =
-        data.data.timings;
+            const lat =
+                position.coords.latitude;
 
-    renderPrayerTimes();
+            const lng =
+                position.coords.longitude;
 
-    updateNextPrayer();
+            const url =
+                `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lng}&method=11`;
+
+            const response =
+                await fetch(url);
+
+            const data =
+                await response.json();
+
+            prayerTimes =
+                data.data.timings;
+
+            renderPrayerTimes();
+
+            updateNextPrayer();
+
+        },
+
+        (error) => {
+
+            console.error(error);
+
+        }
+
+    );
 
 }
 
