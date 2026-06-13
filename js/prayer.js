@@ -27,8 +27,11 @@ updateNextPrayer();
 
 function renderPrayerTimes(){
 
+    const nextPrayer =
+    getNextPrayerName();
+
 const target =
-document.getElementById(
+document.getElementById(0
 "prayerTimes"
 );
 
