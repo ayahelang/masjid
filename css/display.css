@@ -134,3 +134,15 @@ margin-top:10px;
 }
 
 }
+
+
+.wallpaper-card{
+overflow:hidden;
+border-radius:20px;
+}
+
+.wallpaper-img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
