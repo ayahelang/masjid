@@ -100,3 +100,37 @@ font-size:2rem;
 color:#22c55e;
 margin-top:10px;
 }
+
+@media (min-width: 1024px){
+
+.container{
+    height:100vh;
+    display:grid;
+
+    grid-template-columns:
+    35% 65%;
+
+    grid-template-rows:
+    auto 1fr auto;
+
+    gap:20px;
+}
+
+.header{
+    grid-column:1 / 2;
+}
+
+.clock-card{
+    grid-column:1 / 2;
+}
+
+.prayer-card{
+    grid-column:1 / 2;
+}
+
+.wallpaper-card{
+    grid-column:2 / 3;
+    grid-row:1 / span 3;
+}
+
+}
