@@ -36,9 +36,9 @@ function renderConfig() {
         .innerText =
         config.masjid.nama;
 
-    document.getElementById("masjidAddress")
-        .innerText =
-        config.masjid.alamat;
+    document.getElementById("masjidTagline")
+.innerText =
+config.masjid.tagline;
 
     document.getElementById("logo")
         .src =
