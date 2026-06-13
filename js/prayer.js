@@ -1,65 +1,101 @@
 let prayerTimes = {};
 
-async function loadPrayerTimes(){
+let countdownInterval;
 
-const lat =
-config.masjid.latitude;
+async function loadPrayerTimes() {
 
-const lng =
-config.masjid.longitude;
+    const lat =
+        config.masjid.latitude;
 
-const url =
-`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lng}&method=11`;
+    const lng =
+        config.masjid.longitude;
 
-const response =
-await fetch(url);
+    const url =
+        `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lng}&method=11`;
 
-const data =
-await response.json();
+    const response =
+        await fetch(url);
 
-prayerTimes =
-data.data.timings;
+    const data =
+        await response.json();
 
-renderPrayerTimes();
-updateNextPrayer();
+    prayerTimes =
+        data.data.timings;
+
+    renderPrayerTimes();
+
+    updateNextPrayer();
 
 }
 
-function renderPrayerTimes(){
+function getNextPrayerName() {
+
+    const now = new Date();
+
+    const prayers = [
+
+        ["Subuh", prayerTimes.Fajr],
+        ["Dzuhur", prayerTimes.Dhuhr],
+        ["Ashar", prayerTimes.Asr],
+        ["Maghrib", prayerTimes.Maghrib],
+        ["Isya", prayerTimes.Isha]
+
+    ];
+
+    for (const prayer of prayers) {
+
+        const [name, time] = prayer;
+
+        const [h, m] =
+            time.split(":");
+
+        const prayerDate =
+            new Date();
+
+        prayerDate.setHours(h, m, 0, 0);
+
+        if (prayerDate > now) {
+            return name;
+        }
+
+    }
+
+    return "Subuh";
+
+}
+
+function renderPrayerTimes() {
 
     const nextPrayer =
-    getNextPrayerName();
+        getNextPrayerName();
 
-const target =
-document.getElementById(0
-"prayerTimes"
-);
+    const target =
+        document.getElementById(
+            "prayerTimes"
+        );
 
-const prayers = [
-"Fajr",
-"Dhuhr",
-"Asr",
-"Maghrib",
-"Isha"
-];
+    const prayers = [
+        "Fajr",
+        "Dhuhr",
+        "Asr",
+        "Maghrib",
+        "Isha"
+    ];
 
-const labels = {
-Fajr:"Subuh",
-Dhuhr:"Dzuhur",
-Asr:"Ashar",
-Maghrib:"Maghrib",
-Isha:"Isya"
-};
+    const labels = {
 
-target.innerHTML =
-prayers.map(p=>`
+        Fajr: "Subuh",
+        Dhuhr: "Dzuhur",
+        Asr: "Ashar",
+        Maghrib: "Maghrib",
+        Isha: "Isya"
 
-<div class="
-prayer-item
-${nextPrayer===labels[p]
-? 'active-prayer'
-: ''}
-">
+    };
+
+    target.innerHTML =
+        prayers.map(p => `
+
+<div class="prayer-item ${nextPrayer===labels[p] ? 'active-prayer' : ''}">
 
 <span>${labels[p]}</span>
 
@@ -71,47 +107,46 @@ ${nextPrayer===labels[p]
 
 }
 
-function updateNextPrayer(){
+function updateNextPrayer() {
 
-const now = new Date();
+    const now =
+        new Date();
 
-const list = [
+    const list = [
 
-["Subuh", prayerTimes.Fajr],
-["Dzuhur", prayerTimes.Dhuhr],
-["Ashar", prayerTimes.Asr],
-["Maghrib", prayerTimes.Maghrib],
-["Isya", prayerTimes.Isha]
+        ["Subuh", prayerTimes.Fajr],
+        ["Dzuhur", prayerTimes.Dhuhr],
+        ["Ashar", prayerTimes.Asr],
+        ["Maghrib", prayerTimes.Maghrib],
+        ["Isya", prayerTimes.Isha]
 
-];
+    ];
 
-for(const item of list){
+    for (const item of list) {
 
-const [name,time] = item;
+        const [name, time] = item;
 
-const [h,m] =
-time.split(":");
+        const [h, m] =
+            time.split(":");
 
-const prayerDate =
-new Date();
+        const prayerDate =
+            new Date();
 
-prayerDate.setHours(h);
-prayerDate.setMinutes(m);
-prayerDate.setSeconds(0);
+        prayerDate.setHours(h, m, 0, 0);
 
-if(prayerDate > now){
+        if (prayerDate > now) {
 
-showCountdown(
-name,
-time,
-prayerDate
-);
+            showCountdown(
+                name,
+                time,
+                prayerDate
+            );
 
-return;
+            return;
 
-}
+        }
 
-}
+    }
 
 }
 
@@ -119,49 +154,64 @@ function showCountdown(
     name,
     time,
     prayerDate
-){
+) {
 
-    document.getElementById("nextPrayerName")
-        .innerText = name;
+    document.getElementById(
+        "nextPrayerName"
+    ).innerText = name;
 
-    document.getElementById("nextPrayerTime")
-        .innerText = time;
+    document.getElementById(
+        "nextPrayerTime"
+    ).innerText = time;
 
-    clearInterval(countdownInterval);
+    clearInterval(
+        countdownInterval
+    );
 
-    countdownInterval = setInterval(() => {
+    countdownInterval =
+        setInterval(() => {
 
-        const now = new Date();
+            const now =
+                new Date();
 
-        const diff = prayerDate - now;
+            const diff =
+                prayerDate - now;
 
-        if(diff <= 0){
+            if (diff <= 0) {
 
-            clearInterval(countdownInterval);
+                clearInterval(
+                    countdownInterval
+                );
 
-            updateNextPrayer();
+                updateNextPrayer();
 
-            return;
-        }
+                return;
 
-        const h =
-            Math.floor(diff / 3600000);
+            }
 
-        const m =
-            Math.floor((diff % 3600000) / 60000);
+            const h =
+                Math.floor(diff / 3600000);
 
-        const s =
-            Math.floor((diff % 60000) / 1000);
+            const m =
+                Math.floor(
+                    (diff % 3600000) / 60000
+                );
 
-        document.getElementById("countdown")
-            .innerText =
-            `${h}j ${m}m ${s}d`;
+            const s =
+                Math.floor(
+                    (diff % 60000) / 1000
+                );
 
-    },1000);
+            document.getElementById(
+                "countdown"
+            ).innerText =
+                `${h}j ${m}m ${s}d`;
+
+        }, 1000);
 
 }
 
-function autoRefreshPrayer(){
+function autoRefreshPrayer() {
 
     const now =
         new Date();
@@ -179,12 +229,12 @@ function autoRefreshPrayer(){
     const delay =
         nextDay - now;
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
         loadPrayerTimes();
 
         autoRefreshPrayer();
 
-    },delay);
-}
+    }, delay);
 
+}
