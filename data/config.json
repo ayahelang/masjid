@@ -2,7 +2,9 @@
   "masjid": {
     "nama": "Masjid Silverhawk",
     "alamat": "Depok, Jawa Barat",
-    "logo": "assets/logo/logo.png"
+    "logo": "assets/logo/logo.png",
+    "latitude": -6.4025,
+    "longitude": 106.7942
   },
 
   "runningText": [
@@ -15,13 +17,4 @@
     "Kajian Ahad Ba'da Subuh",
     "Jumat Berkah Pekan Ini"
   ]
-}
-{
-  "masjid": {
-    "nama": "Masjid Silverhawk",
-    "alamat": "Depok, Jawa Barat",
-    "logo": "assets/logo/logo.png",
-    "latitude": -6.4025,
-    "longitude": 106.7942
-  }
 }
