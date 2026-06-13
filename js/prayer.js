@@ -107,45 +107,47 @@ return;
 }
 
 function showCountdown(
-name,
-time,
-prayerDate
+    name,
+    time,
+    prayerDate
 ){
 
-document.getElementById(
-"nextPrayerName"
-).innerText = name;
+    document.getElementById("nextPrayerName")
+        .innerText = name;
 
-document.getElementById(
-"nextPrayerTime"
-).innerText = time;
+    document.getElementById("nextPrayerTime")
+        .innerText = time;
 
-setInterval(()=>{
+    clearInterval(countdownInterval);
 
-const now =
-new Date();
+    countdownInterval = setInterval(() => {
 
-const diff =
-prayerDate-now;
+        const now = new Date();
 
-const h =
-Math.floor(diff/3600000);
+        const diff = prayerDate - now;
 
-const m =
-Math.floor(
-(diff%3600000)/60000
-);
+        if(diff <= 0){
 
-const s =
-Math.floor(
-(diff%60000)/1000
-);
+            clearInterval(countdownInterval);
 
-document.getElementById(
-"countdown"
-).innerText =
-`${h}j ${m}m ${s}d`;
+            updateNextPrayer();
 
-},1000);
+            return;
+        }
+
+        const h =
+            Math.floor(diff / 3600000);
+
+        const m =
+            Math.floor((diff % 3600000) / 60000);
+
+        const s =
+            Math.floor((diff % 60000) / 1000);
+
+        document.getElementById("countdown")
+            .innerText =
+            `${h}j ${m}m ${s}d`;
+
+    },1000);
 
 }
