@@ -1,0 +1,51 @@
+let config = {};
+
+async function loadConfig(){
+
+    const res =
+        await fetch(
+        "data/config.json"
+        );
+
+    config =
+        await res.json();
+
+    fillForm();
+
+}
+
+function fillForm(){
+
+    document
+    .getElementById(
+    "namaMasjid"
+    )
+    .value =
+    config.masjid.nama;
+
+    document
+    .getElementById(
+    "alamatMasjid"
+    )
+    .value =
+    config.masjid.alamat;
+
+    document
+    .getElementById(
+    "runningText"
+    )
+    .value =
+    config.runningText.join(
+    "\n"
+    );
+
+    document
+    .getElementById(
+    "announcement"
+    )
+    .value =
+    config.announcement.join(
+    "\n"
+    );
+
+}
