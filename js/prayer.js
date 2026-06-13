@@ -21,6 +21,7 @@ prayerTimes =
 data.data.timings;
 
 renderPrayerTimes();
+updateNextPrayer();
 
 }
 
