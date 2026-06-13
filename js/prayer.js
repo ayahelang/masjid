@@ -266,3 +266,39 @@ function autoRefreshPrayer() {
     }, delay);
 
 }
+
+async function loadLocationName(
+lat,
+lng
+){
+
+try{
+
+const response =
+await fetch(
+`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+);
+
+const data =
+await response.json();
+
+document.getElementById(
+"locationName"
+).innerText =
+
+data.address.city ||
+
+data.address.town ||
+
+data.address.county ||
+
+"Lokasi Tidak Diketahui";
+
+}
+catch(e){
+
+console.error(e);
+
+}
+
+}
