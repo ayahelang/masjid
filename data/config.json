@@ -1,0 +1,18 @@
+{
+  "masjid": {
+    "nama": "Masjid Silverhawk",
+    "alamat": "Depok, Jawa Barat",
+    "logo": "assets/logo/logo.png"
+  },
+
+  "runningText": [
+    "Matikan HP saat sholat",
+    "Jaga kebersihan masjid",
+    "Mari makmurkan masjid"
+  ],
+
+  "announcement": [
+    "Kajian Ahad Ba'da Subuh",
+    "Jumat Berkah Pekan Ini"
+  ]
+}
